@@ -106,7 +106,7 @@ pyserver-http/
 3. **Test the endpoints:**
 
    - Access `http://localhost:4221/` for a 200 OK response.
-   - Use `curl` or a browser to test `/echo/<message>`, `/files/<filename>`, or send a POST request to `/files`.
+   - Use `curl` or a browser to test `/echo/<message>`, `/files/<filename>`, or send a POST request to `/files/<filename>`.
 
 ## Contributing
 
