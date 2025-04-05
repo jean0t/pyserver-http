@@ -1,0 +1,12 @@
+[2025-04-05 19:22:13,261] DEBUG: Server is active.
+[2025-04-05 19:22:20,951] INFO: Server accepted connection from the client [127.0.0.1/40366]
+[2025-04-05 19:22:20,952] INFO: client [127.0.0.1:40366] accessing /user-agent/ with method GET
+[2025-04-05 19:22:21,011] INFO: Server accepted connection from the client [127.0.0.1/40382]
+[2025-04-05 19:22:21,011] INFO: client [127.0.0.1:40382] accessing /favicon.ico/ with method GET
+[2025-04-05 19:23:47,832] INFO: Server accepted connection from the client [127.0.0.1/60208]
+[2025-04-05 19:23:47,833] INFO: client [127.0.0.1:60208] accessing /user-agent/ with method GET
+[2025-04-05 19:25:11,699] DEBUG: Server interrupted manually
+[2025-04-05 19:25:11,699] DEBUG: Closing server
+[2025-04-05 19:25:17,847] DEBUG: Server is active.
+[2025-04-05 19:25:19,491] DEBUG: Server interrupted manually
+[2025-04-05 19:25:19,491] DEBUG: Closing server
