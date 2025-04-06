@@ -31,17 +31,6 @@ class GetHandler(BaseHandler):
     def __init__(self, file_directory: PosixPath):
             super().__init__(file_directory)
     
-    # Helpers to build_response
-    def build_http(self):
-        return f"HTTP/1.1 {self.status_code} {self.status_message}{CRLF}"
-
-    def build_headers(self):
-        header_list = [f"{k}: {self.headers[k]}" for k in self.headers]
-        return f"{CRLF.join(header_list)}{CRLF * 2}"
-
-    def build_body(self):
-        return f"{self.body + CRLF if self.body else self.body}"
-
     def build_response(self):
         r"""
         Build a general response that will depends on the variable self.headers, self.body, self.status_code and self.status_message.
