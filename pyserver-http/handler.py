@@ -59,12 +59,10 @@ class GetHandler(BaseHandler):
         if self.compression is True and self.body != "": 
             self.body = gzip.compress(self.body.encode(STANDARD_DECODE_ENCODE))
             if self.headers.get("Content-Length", None):
-                self.headers["Content-Length"] = len(self.body)
+                self.headers["Content-Length"] = len(self.body) + 2 # + 2 due to the CRLF \r\n -> 2 bytes
 
         message = Response.build_message(self.status_code, self.status_message, self.headers, self.body, self.compression)
-        if self.compression:
-            return message
-        return message.encode(STANDARD_DECODE_ENCODE)
+        return message
     
     def root(self, target: str):
         """
@@ -153,22 +151,20 @@ class Response:
     """
 
     @staticmethod
-    def build_http(status_code: int, status_message: str) -> str:
-        return f"HTTP/1.1 {status_code} {status_message}{CRLF}"
+    def build_http(status_code: int, status_message: str) -> bytes:
+        return f"HTTP/1.1 {status_code} {status_message}{CRLF}".encode(STANDARD_DECODE_ENCODE)
 
     @staticmethod
-    def build_headers(headers: Dict) -> str:
+    def build_headers(headers: Dict) -> bytes:
         header_list = [f"{k}: {headers[k]}" for k in headers]
-        return f"{CRLF.join(header_list)}{CRLF if header_list else ''}{CRLF}"
+        return f"{CRLF.join(header_list)}{CRLF if header_list else ''}{CRLF}".encode(STANDARD_DECODE_ENCODE)
 
     @staticmethod
-    def build_body(body: str|bytes, compression: bool) -> str|bytes:
+    def build_body(body: str|bytes, compression: bool) -> bytes:
         if compression:
             return body + CRLF.encode(STANDARD_DECODE_ENCODE)
-        return f"{body}{CRLF if body else ''}"
+        return f"{body}{CRLF if body else ''}".encode(STANDARD_DECODE_ENCODE)
     
     @staticmethod
-    def build_message(status_code: int, status_message: str, headers: Dict, body: str, compression = False) -> str|bytes:
-            if compression:
-                return f"{Response.build_http(status_code, status_message)}{Response.build_headers(headers)}".encode(STANDARD_DECODE_ENCODE) + Response.build_body(body, compression)
-            return f"{Response.build_http(status_code, status_message)}{Response.build_headers(headers)}{Response.build_body(body, compression)}"
+    def build_message(status_code: int, status_message: str, headers: Dict, body: str, compression = False) -> bytes:
+        return Response.build_http(status_code, status_message) + Response.build_headers(headers) + Response.build_body(body, compression)

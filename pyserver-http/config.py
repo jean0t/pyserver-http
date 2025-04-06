@@ -1,5 +1,6 @@
 CRLF = "\r\n"
 STANDARD_DECODE_ENCODE = "utf-8"
+accepted_encoding = ["gzip"]
 
 class StatusCode:
     SUCCESS = 200

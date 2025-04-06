@@ -10,3 +10,27 @@
 [2025-04-05 19:25:17,847] DEBUG: Server is active.
 [2025-04-05 19:25:19,491] DEBUG: Server interrupted manually
 [2025-04-05 19:25:19,491] DEBUG: Closing server
+[2025-04-06 12:32:22,164] DEBUG: Server is active.
+[2025-04-06 12:32:42,245] INFO: Server accepted connection from the client [127.0.0.1/40402]
+[2025-04-06 12:32:42,246] INFO: client [127.0.0.1:40402] accessing /echo/abc with method GET
+[2025-04-06 12:55:57,517] DEBUG: Server interrupted manually
+[2025-04-06 12:55:57,518] DEBUG: Closing server
+[2025-04-06 12:55:59,273] DEBUG: Server is active.
+[2025-04-06 12:56:01,924] INFO: Server accepted connection from the client [127.0.0.1/57106]
+[2025-04-06 12:56:01,925] INFO: client [127.0.0.1:57106] accessing /echo/abc with method GET
+[2025-04-06 12:56:20,933] INFO: Server accepted connection from the client [127.0.0.1/47358]
+[2025-04-06 12:56:20,934] INFO: client [127.0.0.1:47358] accessing /echo/abc with method GET
+[2025-04-06 12:56:35,450] INFO: Server accepted connection from the client [127.0.0.1/37994]
+[2025-04-06 12:56:35,451] INFO: client [127.0.0.1:37994] accessing /echo/abc with method GET
+[2025-04-06 12:56:42,923] INFO: Server accepted connection from the client [127.0.0.1/45510]
+[2025-04-06 12:56:42,924] INFO: client [127.0.0.1:45510] accessing /echo/abc with method GET
+[2025-04-06 12:56:52,010] INFO: Server accepted connection from the client [127.0.0.1/46010]
+[2025-04-06 12:56:52,010] INFO: client [127.0.0.1:46010] accessing /echo/abc with method GET
+[2025-04-06 12:57:03,201] INFO: Server accepted connection from the client [127.0.0.1/36478]
+[2025-04-06 12:57:03,202] INFO: client [127.0.0.1:36478] accessing /echo/abc with method GET
+[2025-04-06 12:57:13,202] INFO: Server accepted connection from the client [127.0.0.1/50860]
+[2025-04-06 12:57:13,203] INFO: client [127.0.0.1:50860] accessing /echo/abc with method GET
+[2025-04-06 12:57:21,106] INFO: Server accepted connection from the client [127.0.0.1/50874]
+[2025-04-06 12:57:21,107] INFO: client [127.0.0.1:50874] accessing /echo/abc with method GET
+[2025-04-06 12:57:27,657] INFO: Server accepted connection from the client [127.0.0.1/40722]
+[2025-04-06 12:57:27,658] INFO: client [127.0.0.1:40722] accessing /echo/abc with method GET
