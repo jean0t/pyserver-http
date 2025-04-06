@@ -31,8 +31,8 @@ class Request:
     def __init__(self, payload, file_directory):
         self.request = Parser(payload.decode(STANDARD_DECODE_ENCODE))
         self.router = Router()
-        self._get_handler = GetHandler(file_directory)
-        self._post_handler = PostHandler(file_directory)
+        self._get_handler = GetHandler(file_directory, self.request.headers)
+        self._post_handler = PostHandler(file_directory, self.request.headers)
         self._add_routes()
 
     def _add_routes(self):
@@ -48,8 +48,7 @@ class Request:
 
     def Request(self) -> bytes:
         if self.request.method == "GET":
-            return self.router.route(self.request.method, self.request.base_path)(self.request.headers, self.request.rest_path)
+            return self.router.route(self.request.method, self.request.base_path)(self.request.rest_path)
         
         else:
-            return self.router.route(self.request.method, self.request.base_path)(self.request.headers, self.request.rest_path, self.request.body)
-
+            return self.router.route(self.request.method, self.request.base_path)(self.request.rest_path, self.request.body)

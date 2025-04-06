@@ -1,15 +1,16 @@
 import socket  
+import logging
 import threading
 
-from .log import Log
 from .request import Request
+from .log import Log
 from pathlib import Path
 
 # Log instance
 log = Log()
 
 def handle_request(client_socket, client_address, file_directory):
-    request = Request(client_socket.recv(2048), file_directory)
+    request = Request(client_socket.recv(1024), file_directory)
     server_answer = request.Request()
     log.info(f"client [{client_address[0]}:{client_address[1]}] accessing {request.request.base_path + '/' + request.request.rest_path} with method {request.request.method}")
     client_socket.sendall(server_answer)
@@ -38,4 +39,9 @@ def main(file_directory):
         server_socket.close()
 
 
-
+if __name__ == "__main__":
+    from argparse import ArgumentParser
+    parser = ArgumentParser(prog= "http_server", description="http server")
+    parser.add_argument("-d", "--directory", action="store", default="files", type=str)
+    args = parser.parse_args()
+    main(args.directory)
