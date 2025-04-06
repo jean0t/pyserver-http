@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Custom HTTP Server</title>
+  <style>
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Animation for the gradient background */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Card styles */
+    .card {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2rem 3rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+    }
+    
+    /* Fade-in animation for the card */
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    /* Heading styles */
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      animation: slideIn 1s ease forwards;
+    }
+    
+    /* Slide-in animation for the heading */
+    @keyframes slideIn {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      .card {
+        padding: 1.5rem 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Hello there!</h1>
+    <p>I am running it in my own HTTP server, serving that page :D</p>
+  </div>
+</body>
+</html>

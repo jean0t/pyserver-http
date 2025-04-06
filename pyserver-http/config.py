@@ -1,6 +1,7 @@
 CRLF = "\r\n"
 STANDARD_DECODE_ENCODE = "utf-8"
 accepted_encoding = ["gzip"]
+ENDPOINTS = ["echo", "user-agent", "files"]
 
 class StatusCode:
     SUCCESS = 200

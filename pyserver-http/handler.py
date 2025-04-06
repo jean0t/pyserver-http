@@ -23,6 +23,15 @@ class BaseHandler(ABC):
     def accept_compression(self):
         self.compression = True
         self.headers["Content-Encoding"] = "gzip"
+        self.headers["Vary"]= "Accept-Encoding"
+    
+    def set_content_headers(self, content_type, content):
+        self.headers["Content-Type"] = content_type
+        self.headers["Content-Length"] = len(content)
+    
+    def set_not_found_headers(self):
+        self.status_code = StatusCode.NOTFOUND
+        self.status_message = StatusMessage.NOTFOUND
 
     @abstractmethod
     def build_response(self):
@@ -56,10 +65,10 @@ class GetHandler(BaseHandler):
         for k, v in self.headers.items():
             header_list.append(f"{k}: {v}")
         
-        if self.compression is True and self.body != "": 
+        if self.compression is True: 
             self.body = gzip.compress(self.body.encode(STANDARD_DECODE_ENCODE))
             if self.headers.get("Content-Length", None):
-                self.headers["Content-Length"] = len(self.body) + 2 # + 2 due to the CRLF \r\n -> 2 bytes
+                self.headers["Content-Length"] = len(self.body + CRLF.encode(STANDARD_DECODE_ENCODE))
 
         message = Response.build_message(self.status_code, self.status_message, self.headers, self.body, self.compression)
         return message
@@ -69,6 +78,12 @@ class GetHandler(BaseHandler):
         Return for the route /
         """
         self.headers = self.request_headers
+        self.set_content_headers(ContentType.PLAIN_TEXT, "")
+        page = self.file_directory.parent.absolute().joinpath(target)
+        if page.exists() and page.is_file() and page.suffix == ".html":
+            self.compression = False
+            self.body = page.read_text()
+            self.set_content_headers(ContentType.HTML, page.read_text())
         return self.build_response()
 
     def echo(self, target: str):
@@ -76,8 +91,7 @@ class GetHandler(BaseHandler):
         Return for the route /echo
         """
         
-        self.headers["Content-Type"] = ContentType.PLAIN_TEXT
-        self.headers["Content-Length"] = len(target)
+        self.set_content_headers(ContentType.PLAIN_TEXT, target)
         self.body = target
         return self.build_response()
     
@@ -86,8 +100,7 @@ class GetHandler(BaseHandler):
         Return for the route /user-agent
         """
         filter = "User-Agent"
-        self.headers["Content-Type"] = ContentType.PLAIN_TEXT
-        self.headers["Content-Length"] = len(self.request_headers[filter])
+        self.set_content_headers(ContentType.PLAIN_TEXT, self.request_headers[filter])
         self.body = self.request_headers[filter]
         return self.build_response()
 
@@ -99,13 +112,11 @@ class GetHandler(BaseHandler):
         file = self.file_directory / target
         if file.exists() and file.is_file():
             file_contents = file.read_text()
-            self.headers["Content-Type"] = ContentType.FILE
-            self.headers["Content-Length"] = len(file_contents.replace("\n", ""))
+            self.set_content_headers(ContentType.FILE, file_contents.replace("\n", ""))
             self.body = file_contents
             return self.build_response()
         else:
-            self.status_code = StatusCode.NOTFOUND
-            self.status_message = StatusMessage.NOTFOUND
+            self.set_not_found_headers()
             return self.build_response()
     
 
@@ -166,5 +177,5 @@ class Response:
         return f"{body}{CRLF if body else ''}".encode(STANDARD_DECODE_ENCODE)
     
     @staticmethod
-    def build_message(status_code: int, status_message: str, headers: Dict, body: str, compression = False) -> bytes:
+    def build_message(status_code: int, status_message: str, headers: Dict, body: str|bytes, compression = False) -> bytes:
         return Response.build_http(status_code, status_message) + Response.build_headers(headers) + Response.build_body(body, compression)

@@ -1,4 +1,4 @@
-from .config import CRLF, STANDARD_DECODE_ENCODE
+from .config import CRLF, STANDARD_DECODE_ENCODE, ENDPOINTS
 from .route import Router
 from .handler import GetHandler, PostHandler
 
@@ -15,13 +15,16 @@ class Parser:
     
     def parse_path(self):
         tmp = self.path.strip("/").split("/", 1) # /echo/abc/dcs -> ['echo', 'abc/dcs']
-        if not tmp[0]:
-            return "/", ""
-        
-        elif len(tmp) < 2:
-            return "/" + tmp[0], ""
-        
-        return "/" + tmp[0], tmp[1]
+        match tmp[0]:
+            case "/"|"":
+                return "/", ""
+            
+            case "echo"|"files"|"user-agent":
+                return "/" + tmp[0], tmp[1]
+            
+            case _:
+                return "/", tmp[0] + "/" + "".join(tmp[1:])
+
 
 class Request:
     """
