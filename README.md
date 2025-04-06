@@ -30,6 +30,7 @@ pyserver-http is a lightweight HTTP server written in Python using only the stan
   - `/` returns a simple 200 OK response.
   - `/user-agent` returns the user agent of the user.
   - `/echo/<message>` returns the `<message>` as the response body.
+  - `/path/to/html/file` returns the `file.html` as the response to be shown in the browser.
 - **Threading Support:** Uses threading to accept multiple simultaneous requests.
 - **Command-Line Option:** Supports a `--directory` argument to change the base directory for file operations.
 - **No Third-Party Libraries:** Built entirely with Python’s standard library.
@@ -55,6 +56,10 @@ pyserver-http is built using a combination of design patterns that help keep con
 - **GET /**
   - **Description:** Returns a 200 OK response.
   - **Response:** Simple HTML page indicating success.
+
+- **GET /path/to/file.html**
+  - **Description:** Returns a 200 OK response.
+  - **Response:** HTML page.
 
 - **GET /echo/\<message\>**
   - **Description:** Returns the text following `/echo/` as the body.
