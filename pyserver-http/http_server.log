@@ -34,3 +34,5 @@
 [2025-04-06 12:57:21,107] INFO: client [127.0.0.1:50874] accessing /echo/abc with method GET
 [2025-04-06 12:57:27,657] INFO: Server accepted connection from the client [127.0.0.1/40722]
 [2025-04-06 12:57:27,658] INFO: client [127.0.0.1:40722] accessing /echo/abc with method GET
+[2025-04-06 13:00:03,740] DEBUG: Server interrupted manually
+[2025-04-06 13:00:03,740] DEBUG: Closing server
