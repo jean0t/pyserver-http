@@ -118,9 +118,9 @@ pyserver-http is licensed under the GPL-3 license. See the [LICENSE](LICENSE) fi
 
 ## To-Do
 
-- **Gzip Encoding/Decoding:** Implement gzip support for request and response bodies.
-- **Further Testing:** Additional testing and improvements in error handling.
-- **Enhancements:** Consider more robust routing (e.g., regex-based) and additional HTTP methods.
+- [x] **Gzip Encoding/Decoding:** Implement gzip support for request and response bodies.
+- [ ] **Further Testing:** Additional testing and improvements in error handling.
+- [ ] **Enhancements:** Consider more robust routing (e.g., regex-based) and additional HTTP methods.
 
 ---
 
